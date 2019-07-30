@@ -58,6 +58,7 @@ public class EditorFeedMemo extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -145,6 +146,13 @@ public class EditorFeedMemo extends javax.swing.JFrame {
 
         jLabel5.setText("0");
 
+        jButton3.setText("Limpar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -160,6 +168,8 @@ public class EditorFeedMemo extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,7 +194,8 @@ public class EditorFeedMemo extends javax.swing.JFrame {
                 .addGap(1, 1, 1)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -216,8 +227,8 @@ public class EditorFeedMemo extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextArea2KeyPressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JFileChooser jf = new JFileChooser();        
-        JTextArea[] j = {jTextArea4,jTextArea2};
+        JFileChooser jf = new JFileChooser();
+        JTextArea[] j = {jTextArea4, jTextArea2};
         for (int i = 0; i < 2; i++) {
             quebrar_Salvar_String(j[i], i);
             if (jf.showSaveDialog(jPanel1) == JFileChooser.APPROVE_OPTION) {
@@ -226,7 +237,7 @@ public class EditorFeedMemo extends javax.swing.JFrame {
                     try (Writer fw2 = new OutputStreamWriter(new FileOutputStream(f, true), StandardCharsets.UTF_8)) {
                         Iterator<String> it = ar[i].iterator();
                         while (it.hasNext()) {
-                            fw2.append(it.next()+'\n');
+                            fw2.append(it.next() + '\n');
                         }
                     } catch (Exception e) {
                         //System.out.println(e.toString());
@@ -234,7 +245,7 @@ public class EditorFeedMemo extends javax.swing.JFrame {
                 }
             }
             ar[i].clear();
-        }        
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextArea4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea4KeyPressed
@@ -246,23 +257,31 @@ public class EditorFeedMemo extends javax.swing.JFrame {
         if (b > 73) {
             while (b > 73) {  //lembrando que 73 � o tamanho da linha
                 int index = aux.indexOf(" ", 55);
-                String aux2="";
-                try {                    
-                    aux2 = aux.substring(0, index) + "...";                    
+                String aux2 = "";
+                try {
+                    aux2 = aux.substring(0, index) + "...";
                     aux = aux.substring(index + 1, b);
                 } catch (Exception e) {
-                    if(index==-1){
-                        aux2 = aux.substring(0, 73)+"...";
-                        index=73;
+                    if (index == -1) {
+                        aux2 = aux.substring(0, 73) + "...";
+                        index = 73;
                         aux = aux.substring(index, b);
                     }
                 }
                 ret += aux2 + '\n';
-                ar[i].add("\"" + aux2 + "\"," + tag);                
+                if (i == 0) {
+                    ar[i].add("\"" + aux2 + "\"," + tag);
+                } else {
+                    ar[i].add("\"" + aux2 + "\",n," + tag);
+                }
                 b = aux.length();
             }
         }
-        ar[i].add("\"" + aux + "\"," + tag);
+        if (i == 0) {
+            ar[i].add("\"" + aux + "\"," + tag);
+        } else {
+            ar[i].add("\"" + aux + "\",n," + tag);
+        }
         ret += aux + '\n';
         return ret;
     }
@@ -270,23 +289,28 @@ public class EditorFeedMemo extends javax.swing.JFrame {
     public void quebrar_Salvar_String(javax.swing.JTextArea j, int i) {
         String text3 = j.getText();          //string bruta
         String bkp = "";
-        while (text3.indexOf('\n') > 0 || text3.length() > 73) {
-            int a = text3.indexOf('\n');        //1� trecho encontrado \n
-            if (a != -1) {
-                String aux = text3.substring(0, a);  //separando primeiro trecho
-                text3 = text3.substring(a + 1, text3.length());
-                bkp += quebrar_Salvar_String(aux,i);
-            } else {       //se n�o encontrou nenhum \n ent�o apenas quebre e save
-                bkp += quebrar_Salvar_String(text3,i);
-                break;
+        if (!text3.equals("")) {
+            while (text3.indexOf('\n') > 0 || text3.length() > 73) {
+                int a = text3.indexOf('\n');        //1� trecho encontrado \n
+                if (a != -1) {
+                    String aux = text3.substring(0, a);  //separando primeiro trecho
+                    text3 = text3.substring(a + 1, text3.length());
+                    bkp += quebrar_Salvar_String(aux, i);
+                } else {       //se n�o encontrou nenhum \n ent�o apenas quebre e save
+                    bkp += quebrar_Salvar_String(text3, i);
+                    break;
+                }
             }
+            if (text3.length() < 73) {
+                if (i == 0) {
+                    ar[i].add("\"" + text3 + "\"," + tag);
+                } else {
+                    ar[i].add("\"" + text3 + "\",n," + tag);
+                }
+                bkp += text3 + '\n';
+            }
+            //j.setText(bkp);
         }
-        if (text3.length() < 73) {
-            ar[i].add("\"" + text3 + "\"," + tag);
-            bkp += text3 + '\n';
-        }
-        j.setText(bkp);
-
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -302,12 +326,18 @@ public class EditorFeedMemo extends javax.swing.JFrame {
         // TODO add your handling code here:        
         String text = jTextArea2.getText();
         int a = text.lastIndexOf('\n');
-        if(a!=-1){
-            text = text.substring(a+1, text.length());
+        if (a != -1) {
+            text = text.substring(a + 1, text.length());
         }
         int tam = text.length();
         jLabel5.setText(String.valueOf(tam));
     }//GEN-LAST:event_jTextArea2KeyReleased
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        jTextArea2.setText("");
+        jTextArea4.setText("");
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -351,6 +381,7 @@ public class EditorFeedMemo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
