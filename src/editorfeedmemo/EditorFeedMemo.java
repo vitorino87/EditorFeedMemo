@@ -57,6 +57,8 @@ public class EditorFeedMemo extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -118,6 +120,9 @@ public class EditorFeedMemo extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextArea2KeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextArea2KeyReleased(evt);
+            }
         });
         jScrollPane2.setViewportView(jTextArea2);
 
@@ -139,6 +144,10 @@ public class EditorFeedMemo extends javax.swing.JFrame {
 
         jLabel3.setText("Termine sempre com \"Enter\"");
 
+        jLabel4.setText("Colunas: ");
+
+        jLabel5.setText("0");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -158,7 +167,12 @@ public class EditorFeedMemo extends javax.swing.JFrame {
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))))
+                        .addGap(25, 25, 25))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,7 +181,11 @@ public class EditorFeedMemo extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addGap(3, 3, 3)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(1, 1, 1)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -309,6 +327,17 @@ public class EditorFeedMemo extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTextArea4KeyReleased
 
+    private void jTextArea2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea2KeyReleased
+        // TODO add your handling code here:        
+        String text = jTextArea2.getText();
+        int a = text.lastIndexOf('\n');
+        if(a!=-1){
+            text = text.substring(a+1, text.length());
+        }
+        int tam = text.length();
+        jLabel5.setText(String.valueOf(tam));
+    }//GEN-LAST:event_jTextArea2KeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -355,6 +384,8 @@ public class EditorFeedMemo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
