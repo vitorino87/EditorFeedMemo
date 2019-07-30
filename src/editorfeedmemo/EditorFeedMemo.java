@@ -56,7 +56,6 @@ public class EditorFeedMemo extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -142,8 +141,6 @@ public class EditorFeedMemo extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Termine sempre com \"Enter\"");
-
         jLabel4.setText("Colunas: ");
 
         jLabel5.setText("0");
@@ -162,8 +159,7 @@ public class EditorFeedMemo extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 961, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,8 +184,7 @@ public class EditorFeedMemo extends javax.swing.JFrame {
                 .addGap(1, 1, 1)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -238,35 +233,11 @@ public class EditorFeedMemo extends javax.swing.JFrame {
                     }
                 }
             }
-        }
-
+            ar[i].clear();
+        }        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextArea4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea4KeyPressed
-//        String text = "", text2 = "";
-//        try {
-//            text = jTextArea4.getText(offs, 73);
-//            text2 = jTextArea4.getText(0, offs);
-//        } catch (BadLocationException ex) {
-//            String aux = jTextArea4.getText();
-//            try {
-//                text = jTextArea4.getText(offs, aux.length() - offs);
-//            } catch (BadLocationException ex1) {
-//                Logger.getLogger(EditorFeedMemo.class.getName()).log(Level.SEVERE, null, ex1);
-//            }
-//        }
-//        if (evt.getKeyCode() == 10) {
-//            ar[0].add("\"" + text + "\"," + tag);
-//            offs += text.length() + 1;
-//        } else if (text.length() == 73) {
-//            int index = text.lastIndexOf(" ");
-//            String textAux = text.substring(index + 1, text.length() - 1);
-//            text = text.substring(0, index) + "...";
-//            ar[0].add("\"" + text + "\"," + tag);
-//            text += '\n' + textAux;
-//            jTextArea4.setText(text2 + text);
-//            offs += 73 - textAux.length() + 2;
-//        }
     }//GEN-LAST:event_jTextArea4KeyPressed
 
     public String quebrar_Salvar_String(String aux, int i) {
@@ -383,7 +354,6 @@ public class EditorFeedMemo extends javax.swing.JFrame {
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
