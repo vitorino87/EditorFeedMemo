@@ -27,6 +27,7 @@ public class EditorFeedMemo extends javax.swing.JFrame {
     String textGlobal = "";
     ArrayList<String>[] ar = new ArrayList[2];
     int tag = 0;
+    final String[] label = {"Local para salvar FeedMemo3: ", "Local para salvar FeedMemo2: "};
 
     /**
      * Creates new form EditorFeedMemo
@@ -261,7 +262,7 @@ public class EditorFeedMemo extends javax.swing.JFrame {
             quebrar_Salvar_String(j[i], i);
             if (jf.showSaveDialog(jPanel1) == JFileChooser.APPROVE_OPTION) {
                 File f = jf.getSelectedFile();                
-                l[i].setText(l[i].getText()+" "+f.getAbsolutePath());
+                l[i].setText(label[i]+f.getAbsolutePath());
                 if (f != null) {
                     try (Writer fw2 = new OutputStreamWriter(new FileOutputStream(f, true), StandardCharsets.UTF_8)) {
                         Iterator<String> it = ar[i].iterator();
