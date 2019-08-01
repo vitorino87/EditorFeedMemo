@@ -259,12 +259,12 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Local para salvar FeedMemo3:"/>
+            <Property name="text" type="java.lang.String" value="Local salvo - FeedMemo3:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Local para salvar FeedMemo2:"/>
+            <Property name="text" type="java.lang.String" value="Local salvo - FeedMemo2:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton4">

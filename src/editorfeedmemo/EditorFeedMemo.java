@@ -23,11 +23,10 @@ import javax.swing.JTextArea;
  */
 public class EditorFeedMemo extends javax.swing.JFrame {
 
-    int offs = 0;
     String textGlobal = "";
     ArrayList<String>[] ar = new ArrayList[2];
     int tag = 0;
-    final String[] label = {"Local para salvar FeedMemo3: ", "Local para salvar FeedMemo2: "};
+    final String[] label = {"Local salvo - FeedMemo3: ", "Local salvo - FeedMemo2: "};
 
     /**
      * Creates new form EditorFeedMemo
@@ -161,9 +160,9 @@ public class EditorFeedMemo extends javax.swing.JFrame {
 
         jLabel3.setText("Tag: 0");
 
-        jLabel6.setText("Local para salvar FeedMemo3:");
+        jLabel6.setText("Local salvo - FeedMemo3:");
 
-        jLabel5.setText("Local para salvar FeedMemo2:");
+        jLabel5.setText("Local salvo - FeedMemo2:");
 
         jButton4.setText("Save");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -260,16 +259,16 @@ public class EditorFeedMemo extends javax.swing.JFrame {
             if (jf.showSaveDialog(jPanel1) == JFileChooser.APPROVE_OPTION) {
                 File f = jf.getSelectedFile();
                 l[i].setText(label[i] + f.getAbsolutePath());
-                if (f != null) {
-                    try (Writer fw2 = new OutputStreamWriter(new FileOutputStream(f, true), StandardCharsets.UTF_8)) {
-                        Iterator<String> it = ar[i].iterator();
-                        while (it.hasNext()) {
-                            fw2.append(it.next() + '\n');
-                        }
-                    } catch (Exception e) {
-                        //System.out.println(e.toString());
+                //if (f != null) {
+                try (Writer fw2 = new OutputStreamWriter(new FileOutputStream(f, true), StandardCharsets.UTF_8)) {
+                    Iterator<String> it = ar[i].iterator();
+                    while (it.hasNext()) {
+                        fw2.append(it.next() + '\n');
                     }
+                } catch (Exception e) {
+                    //System.out.println(e.toString());
                 }
+                //}
             }
             ar[i].clear();
         }
@@ -335,8 +334,6 @@ public class EditorFeedMemo extends javax.swing.JFrame {
             }
             bkp += text3 + '\n';
         }
-        //j.setText(bkp);
-
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -376,16 +373,16 @@ public class EditorFeedMemo extends javax.swing.JFrame {
                 for (int i = 0; i < 2; i++) {
                     quebrar_Salvar_String(j[i], i);
                     File f = new File(url[i].trim());
-                    if (f != null) {
-                        try (Writer fw2 = new OutputStreamWriter(new FileOutputStream(f, true), StandardCharsets.UTF_8)) {
-                            Iterator<String> it = ar[i].iterator();
-                            while (it.hasNext()) {
-                                fw2.append(it.next() + '\n');
-                            }
-                        } catch (Exception e) {
-                            //System.out.println(e.toString());
+                    //if (f != null) {
+                    try (Writer fw2 = new OutputStreamWriter(new FileOutputStream(f, true), StandardCharsets.UTF_8)) {
+                        Iterator<String> it = ar[i].iterator();
+                        while (it.hasNext()) {
+                            fw2.append(it.next() + '\n');
                         }
+                    } catch (Exception e) {
+                        //System.out.println(e.toString());
                     }
+                    //}
                     ar[i].clear();
                 }
             } else {
@@ -396,7 +393,7 @@ public class EditorFeedMemo extends javax.swing.JFrame {
 
     private Boolean showChecarTag(java.awt.event.ActionEvent evt) {
         if (tag == 0) {
-            if (JOptionPane.showConfirmDialog(rootPane, "Deseja manter tag=0?", "Tag = 0", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(rootPane, "Tag=0. Deseja alterá-la?", "Tag = 0", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) != JOptionPane.YES_OPTION) {
                 return true;
             } else {
                 jButton2ActionPerformed(evt);
@@ -437,6 +434,7 @@ public class EditorFeedMemo extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 EditorFeedMemo m = new EditorFeedMemo();
                 m.setLocationRelativeTo(null);
