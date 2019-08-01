@@ -393,7 +393,9 @@ public class EditorFeedMemo extends javax.swing.JFrame {
 
     private Boolean showChecarTag(java.awt.event.ActionEvent evt) {
         if (tag == 0) {
-            if (JOptionPane.showConfirmDialog(rootPane, "Tag=0. Deseja alterá-la?", "Tag = 0", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) != JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(rootPane, "Tag=0. Deseja alterá-la"
+                    + "?", "Tag = 0", JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.QUESTION_MESSAGE) != JOptionPane.YES_OPTION) {
                 return true;
             } else {
                 jButton2ActionPerformed(evt);
