@@ -258,8 +258,8 @@ public class EditorFeedMemo extends javax.swing.JFrame {
         for (int i = 0; i < 2; i++) {
             quebrar_Salvar_String(j[i], i);
             if (jf.showSaveDialog(jPanel1) == JFileChooser.APPROVE_OPTION) {
-                File f = jf.getSelectedFile();                
-                l[i].setText(label[i]+f.getAbsolutePath());
+                File f = jf.getSelectedFile();
+                l[i].setText(label[i] + f.getAbsolutePath());
                 if (f != null) {
                     try (Writer fw2 = new OutputStreamWriter(new FileOutputStream(f, true), StandardCharsets.UTF_8)) {
                         Iterator<String> it = ar[i].iterator();
@@ -346,7 +346,7 @@ public class EditorFeedMemo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextArea4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea4KeyReleased
-        
+
     }//GEN-LAST:event_jTextArea4KeyReleased
 
     private void jTextArea2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea2KeyReleased
@@ -368,29 +368,44 @@ public class EditorFeedMemo extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:        
-        String[] url = {jLabel6.getText().substring(jLabel6.getText().indexOf(":")+1),
-        jLabel5.getText().substring(jLabel5.getText().indexOf(":")+1)};
-        JTextArea[] j = {jTextArea4, jTextArea2};
-        if(!url[0].isEmpty() || !url[1].isEmpty()){
-            for (int i = 0; i < 2; i++) {
-            quebrar_Salvar_String(j[i], i);
-            File f = new File(url[i].trim());
-                if (f != null) {
-                    try (Writer fw2 = new OutputStreamWriter(new FileOutputStream(f, true), StandardCharsets.UTF_8)) {
-                        Iterator<String> it = ar[i].iterator();
-                        while (it.hasNext()) {
-                            fw2.append(it.next() + '\n');
+        if (showChecarTag(evt)) {
+            String[] url = {jLabel6.getText().substring(jLabel6.getText().indexOf(":") + 1),
+                jLabel5.getText().substring(jLabel5.getText().indexOf(":") + 1)};
+            JTextArea[] j = {jTextArea4, jTextArea2};
+            if (!url[0].isEmpty() || !url[1].isEmpty()) {
+                for (int i = 0; i < 2; i++) {
+                    quebrar_Salvar_String(j[i], i);
+                    File f = new File(url[i].trim());
+                    if (f != null) {
+                        try (Writer fw2 = new OutputStreamWriter(new FileOutputStream(f, true), StandardCharsets.UTF_8)) {
+                            Iterator<String> it = ar[i].iterator();
+                            while (it.hasNext()) {
+                                fw2.append(it.next() + '\n');
+                            }
+                        } catch (Exception e) {
+                            //System.out.println(e.toString());
                         }
-                    } catch (Exception e) {
-                        //System.out.println(e.toString());
                     }
-                }            
-            ar[i].clear();
+                    ar[i].clear();
+                }
+            } else {
+                jButton1ActionPerformed(evt);
             }
-        }else{
-            jButton1ActionPerformed(evt);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private Boolean showChecarTag(java.awt.event.ActionEvent evt) {
+        if (tag == 0) {
+            if (JOptionPane.showConfirmDialog(rootPane, "Deseja manter tag=0?", "Tag = 0", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                return true;
+            } else {
+                jButton2ActionPerformed(evt);
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
 
     /**
      * @param args the command line arguments
