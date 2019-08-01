@@ -299,7 +299,7 @@ public class EditorFeedMemo extends javax.swing.JFrame {
                 if (i == 0) {
                     ar[i].add("\"" + aux2 + "\"," + tag);
                 } else {
-                    ar[i].add("\"" + aux2 + "\",n," + tag);
+                    ar[i].add("\"" + aux2 + "\",\"n\"," + tag);
                 }
                 b = aux.length();
             }
@@ -307,7 +307,7 @@ public class EditorFeedMemo extends javax.swing.JFrame {
         if (i == 0) {
             ar[i].add("\"" + aux + "\"," + tag);
         } else {
-            ar[i].add("\"" + aux + "\",n," + tag);
+            ar[i].add("\"" + aux + "\",\"n\"," + tag);
         }
         ret += aux + '\n';
         return ret;
@@ -331,7 +331,7 @@ public class EditorFeedMemo extends javax.swing.JFrame {
             if (i == 0) {
                 ar[i].add("\"" + text3 + "\"," + tag);
             } else {
-                ar[i].add("\"" + text3 + "\",n," + tag);
+                ar[i].add("\"" + text3 + "\",\"n\"," + tag);
             }
             bkp += text3 + '\n';
         }
@@ -346,7 +346,7 @@ public class EditorFeedMemo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextArea4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea4KeyReleased
-
+        
     }//GEN-LAST:event_jTextArea4KeyReleased
 
     private void jTextArea2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea2KeyReleased
@@ -367,12 +367,7 @@ public class EditorFeedMemo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        String t1 = jLabel6.getText();
-        String t2 = jLabel5.getText();
-        t1 = t1.substring(t1.indexOf(":")+1);
-        t2 = t2.substring(t1.indexOf(":")+1);
-        
+        // TODO add your handling code here:        
         String[] url = {jLabel6.getText().substring(jLabel6.getText().indexOf(":")+1),
         jLabel5.getText().substring(jLabel5.getText().indexOf(":")+1)};
         JTextArea[] j = {jTextArea4, jTextArea2};
