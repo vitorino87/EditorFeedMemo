@@ -251,26 +251,28 @@ public class EditorFeedMemo extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextArea2KeyPressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JFileChooser jf = new JFileChooser();
-        JTextArea[] j = {jTextArea4, jTextArea2};
-        JLabel[] l = {jLabel6, jLabel5};
-        for (int i = 0; i < 2; i++) {
-            quebrar_Salvar_String(j[i], i);
-            if (jf.showSaveDialog(jPanel1) == JFileChooser.APPROVE_OPTION) {
-                File f = jf.getSelectedFile();
-                l[i].setText(label[i] + f.getAbsolutePath());
-                //if (f != null) {
-                try (Writer fw2 = new OutputStreamWriter(new FileOutputStream(f, true), StandardCharsets.UTF_8)) {
-                    Iterator<String> it = ar[i].iterator();
-                    while (it.hasNext()) {
-                        fw2.append(it.next() + '\n');
+        if (showChecarTag(evt)) {
+            JFileChooser jf = new JFileChooser();
+            JTextArea[] j = {jTextArea4, jTextArea2};
+            JLabel[] l = {jLabel6, jLabel5};
+            for (int i = 0; i < 2; i++) {
+                quebrar_Salvar_String(j[i], i);
+                if (jf.showSaveDialog(jPanel1) == JFileChooser.APPROVE_OPTION) {
+                    File f = jf.getSelectedFile();
+                    l[i].setText(label[i] + f.getAbsolutePath());
+                    //if (f != null) {
+                    try (Writer fw2 = new OutputStreamWriter(new FileOutputStream(f, true), StandardCharsets.UTF_8)) {
+                        Iterator<String> it = ar[i].iterator();
+                        while (it.hasNext()) {
+                            fw2.append(it.next() + '\n');
+                        }
+                    } catch (Exception e) {
+                        //System.out.println(e.toString());
                     }
-                } catch (Exception e) {
-                    //System.out.println(e.toString());
+                    //}
                 }
-                //}
+                ar[i].clear();
             }
-            ar[i].clear();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -394,7 +396,7 @@ public class EditorFeedMemo extends javax.swing.JFrame {
     private Boolean showChecarTag(java.awt.event.ActionEvent evt) {
         if (tag == 0) {
             if (JOptionPane.showConfirmDialog(rootPane, "Tag=0. Deseja alterá-la"
-                    + "?", "Tag = 0", JOptionPane.YES_NO_OPTION, 
+                    + "?", "Tag = 0", JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE) != JOptionPane.YES_OPTION) {
                 return true;
             } else {
