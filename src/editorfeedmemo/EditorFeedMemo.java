@@ -346,6 +346,7 @@ public class EditorFeedMemo extends javax.swing.JFrame {
 
     private void jTextArea4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea4KeyReleased
 
+        keyRelease(jTextArea4);
     }//GEN-LAST:event_jTextArea4KeyReleased
 
     private void jTextArea2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea2KeyReleased
@@ -359,6 +360,16 @@ public class EditorFeedMemo extends javax.swing.JFrame {
         jLabel4.setText("Colunas: " + String.valueOf(tam));
     }//GEN-LAST:event_jTextArea2KeyReleased
 
+    private void keyRelease(JTextArea j){
+        String text = j.getText();
+        int a = text.lastIndexOf('\n');
+        if (a != -1) {
+            text = text.substring(a + 1, text.length());
+        }
+        int tam = text.length();
+        jLabel4.setText("Colunas: " + String.valueOf(tam));
+    }
+    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         jTextArea2.setText("");
