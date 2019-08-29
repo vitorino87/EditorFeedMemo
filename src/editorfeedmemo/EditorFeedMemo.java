@@ -287,8 +287,14 @@ public class EditorFeedMemo extends javax.swing.JFrame {
                 int index = aux.indexOf(" ", 55);
                 String aux2 = "";
                 try {
-                    aux2 = aux.substring(0, index) + "...";
-                    aux = aux.substring(index + 1, b);
+                    if(index <= 73){
+                        aux2 = aux.substring(0, index) + "...";
+                        aux = aux.substring(index + 1, b);
+                    }else{
+                        aux2 = aux.substring(0, 73) + "...";
+                        index = 73;
+                        aux = aux.substring(index, b);
+                    }                    
                 } catch (Exception e) {
                     if (index == -1) {
                         aux2 = aux.substring(0, 73) + "...";
